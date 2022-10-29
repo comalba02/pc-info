@@ -6,6 +6,10 @@
 package pc.info;
 
 import java.awt.Color;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +27,29 @@ public class interfaz extends javax.swing.JFrame {
         setSize(650, 393);
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+
+        //Obtener nombre y direccion Ip del equipo
+        InetAddress direccion;
+        try {
+            direccion = InetAddress.getLocalHost();
+            txt_nombrePC.setText( direccion.getHostName() );
+            txt_ip.setText( direccion.getHostAddress() );
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PcInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //sistema operativo
+        String sistema = System.getProperty("os.name");
+        txt_sistema.setText(sistema);
+        
+        //arquitectura
+        String arquitectura = System.getProperty("os.arch");
+        if ( arquitectura.contains("64") || arquitectura.contains("amd") ) {
+            txt_arquitectura.setText("64 Bits");
+        }
+        else{
+            txt_arquitectura.setText("32 Bits");
+        }
     }
 
     /**
@@ -35,10 +62,10 @@ public class interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_cerrar = new javax.swing.JButton();
-        txt_nombrePC = new javax.swing.JLabel();
-        txt_ip = new javax.swing.JLabel();
-        txt_sistema = new javax.swing.JLabel();
-        txt_arquitectura = new javax.swing.JLabel();
+        txt_nombrePC = new javax.swing.JTextField();
+        txt_ip = new javax.swing.JTextField();
+        txt_sistema = new javax.swing.JTextField();
+        txt_arquitectura = new javax.swing.JTextField();
         lbl_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,25 +95,29 @@ public class interfaz extends javax.swing.JFrame {
         getContentPane().add(btn_cerrar);
         btn_cerrar.setBounds(583, 22, 30, 30);
 
-        txt_nombrePC.setFont(new java.awt.Font("Berlin Sans FB", 0, 11)); // NOI18N
-        txt_nombrePC.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        txt_nombrePC.setFont(new java.awt.Font("Calibri", 0, 17)); // NOI18N
+        txt_nombrePC.setBorder(null);
+        txt_nombrePC.setOpaque(false);
         getContentPane().add(txt_nombrePC);
-        txt_nombrePC.setBounds(340, 71, 220, 30);
+        txt_nombrePC.setBounds(340, 75, 220, 30);
 
-        txt_ip.setFont(new java.awt.Font("Berlin Sans FB", 0, 11)); // NOI18N
-        txt_ip.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        txt_ip.setFont(new java.awt.Font("Calibri", 0, 17)); // NOI18N
+        txt_ip.setBorder(null);
+        txt_ip.setOpaque(false);
         getContentPane().add(txt_ip);
-        txt_ip.setBounds(340, 147, 220, 30);
+        txt_ip.setBounds(340, 149, 220, 30);
 
-        txt_sistema.setFont(new java.awt.Font("Berlin Sans FB", 0, 11)); // NOI18N
-        txt_sistema.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        txt_sistema.setFont(new java.awt.Font("Calibri", 0, 17)); // NOI18N
+        txt_sistema.setBorder(null);
+        txt_sistema.setOpaque(false);
         getContentPane().add(txt_sistema);
-        txt_sistema.setBounds(340, 229, 220, 30);
+        txt_sistema.setBounds(340, 231, 220, 30);
 
-        txt_arquitectura.setFont(new java.awt.Font("Berlin Sans FB", 0, 11)); // NOI18N
-        txt_arquitectura.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        txt_arquitectura.setFont(new java.awt.Font("Calibri", 0, 17)); // NOI18N
+        txt_arquitectura.setBorder(null);
+        txt_arquitectura.setOpaque(false);
         getContentPane().add(txt_arquitectura);
-        txt_arquitectura.setBounds(340, 305, 220, 30);
+        txt_arquitectura.setBounds(340, 307, 220, 30);
 
         lbl_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pc/info/img/fondo.png"))); // NOI18N
         getContentPane().add(lbl_fondo);
@@ -146,9 +177,9 @@ public class interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cerrar;
     private javax.swing.JLabel lbl_fondo;
-    private javax.swing.JLabel txt_arquitectura;
-    private javax.swing.JLabel txt_ip;
-    private javax.swing.JLabel txt_nombrePC;
-    private javax.swing.JLabel txt_sistema;
+    private javax.swing.JTextField txt_arquitectura;
+    private javax.swing.JTextField txt_ip;
+    private javax.swing.JTextField txt_nombrePC;
+    private javax.swing.JTextField txt_sistema;
     // End of variables declaration//GEN-END:variables
 }
