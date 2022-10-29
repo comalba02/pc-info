@@ -16,6 +16,8 @@ public class PcInfo {
      */
     public static void main(String[] args) {
 
+        interfaz i = new interfaz();
+        i.setVisible(true);
         
     }
 
